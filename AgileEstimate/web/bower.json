@@ -1,0 +1,36 @@
+{
+  "name": "Bootstrap",
+  "version": "0.0.1",
+  "authors": [
+    "SanthanaRajagopalan <sanoonline@gmail.com>"
+  ],
+  "description": "Sample APp",
+  "main": "index.html",
+  "moduleType": [
+    "es6",
+    "globals"
+  ],
+  "keywords": [
+    "bootstrap",
+    "backbone"
+  ],
+  "license": "MIT",
+  "homepage": "srajagop.github.io",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "underscore": "~1.8.2",
+    "backbone": "~1.1.1",
+    "requirejs": "~2.1.8",
+    "text": "~2.0.14",
+	"polymer": "Polymer/polymer#^1.0.0"
+  }
+}

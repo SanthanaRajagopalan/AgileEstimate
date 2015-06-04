@@ -1,0 +1,41 @@
+<header class="dashboard">
+	<h1>Dashboard</h1>
+</header>
+<aside class="sidebar" role="navigation">
+		<div class="profile-pic">
+			<img src="https://lh3.googleusercontent.com/-vEOJ8yVKAP8/AAAAAAAAAAI/AAAAAAAABVA/6uQDbhCIUv0/s120-c/photo.jpg" class="img-responsive" alt="">
+			<div class="profile-name">John Doe</div>
+		</div>
+		<nav>
+			 <ul>
+			    <li class="active"><a href="#">Create New Game</a></li>
+			    <li><a href="#">Change Password</a></li>
+			    <li><a href="#">Saved Games</a></li>
+			    <li class="divider"></li>
+			    <li><a href="#">Settings</a></li>
+			  </ul>
+		</nav>
+	</aside>
+<div class="container">
+	<section id="dashboard-content" class="dashboard-content card">
+		<header>
+			<h1>Create New Game</h1>
+		</header>
+		<form class="create-game">
+			<div class="group">
+				<input type="text" name="sprint-name" placeholder="Sprint Number"><span class="bar"></span>
+			</div>
+			<div class="group">
+				<input type="text" name="story-name" placeholder="Story Name"><span class="bar"></span>
+			</div>
+			<div class="group">
+				<input type="text" name="story-desc" placeholder="Story Description"><span class="bar"></span>
+			</div>
+			<label class="label checkbox">
+	          <input type="checkbox" class="checkbox" name="timer" checked>
+	            Timer
+	      	</label>
+	      	<button type="button" class="button buttonBlue save-game">Create</button>
+		</form>
+	</section>
+</div>
