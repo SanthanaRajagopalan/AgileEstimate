@@ -6,7 +6,9 @@ define([
   'underscore',
   'backbone',
   'router',
-], function($, _, Backbone, Router){
+  'firebase',
+  'backbonefire'
+], function($, _, Backbone, Router, Firebase, Backbonefire){
   var initialize = function(){
 	Router.initialize();
   }
