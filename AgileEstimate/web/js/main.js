@@ -10,8 +10,26 @@ require.config({
     backbonefire: 'lib/backbonefire/backbonefire',
     text: 'lib/text/text',
     templates: '../templates'
-    }
+    },
+    
+    shim: {
+        'firebase': {
+            exports: 'Firebase'
+        },
 
+        'underscore': {
+            exports: '_'
+        },
+
+        'backbone': {
+            deps: [ 'underscore', 'jquery' ],
+            exports: 'Backbone'
+        },
+
+        'backbonefire': {
+            deps: [ 'backbone', 'firebase', 'underscore' ]
+        }
+    }
 });
 
 require(['app',], function(App){
