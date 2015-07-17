@@ -3,7 +3,7 @@
 # Runs a Tornado web server with a django project
 # Make sure to edit the DJANGO_SETTINGS_MODULE to point to your settings.py
 #
-# http://localhost:8080/hello-tornado
+# http://localhost:8000/hello-django
 # http://localhost:8080
 
 import sys
@@ -59,7 +59,7 @@ def main():
     tornado_app = tornado.web.Application(
         [
             ('/login', LoginHandler),
-			(r"/", MainHandler),
+            (r"/", MainHandler),
             ('/save', SaveGameHandler),
             (r'/channel', WebSocketHandler),
             ('.*', tornado.web.FallbackHandler, dict(fallback=container)),
