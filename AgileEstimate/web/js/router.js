@@ -6,9 +6,11 @@ define([
   'underscore',
   'backbone',
   'views/login/LoginView',
-  'views/game/GameView',
-  'views/footer/FooterView'
-], function($, _, Backbone, LoginView, GameView, FooterView) {
+  'views/home/HomeView',
+  'views/footer/FooterView',
+  'firebase',
+  'backbonefire'  
+], function($, _, Backbone, LoginView, HomeView, FooterView, Firebase) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -22,12 +24,21 @@ define([
   
   var initialize = function(){
 
-    var app_router = new AppRouter;
-    
+    var app_router = new AppRouter,
+    fireRef = new Firebase("https://glowing-inferno-9580.firebaseio.com/");
     app_router.on('route:defaultAction', function (actions) {
        // We have no matching route, lets display the home page 
-        var loginView = new LoginView();
-        loginView.render();
+    	if (fireRef.getAuth()) {
+			fireRef.child('poker').child('users').child(fireRef.getAuth().uid).once('value', function(snap){
+				console.log('messages', snap.val());
+	    		var homeView = new HomeView({model:snap.val()});
+	    		homeView.render();
+			});
+		}else {
+			  var loginView = new LoginView();
+		      loginView.render();
+		}
+      
     });
 
     // Dynamic routes

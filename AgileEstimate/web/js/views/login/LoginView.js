@@ -4,61 +4,60 @@ define([
   'views/home/HomeView',
   'text!templates/login/loginTemplate.html',
   'backbone',
+  'collections/user/UserCollection',
+  'models/user/UserModel',
   'firebase',
   'backbonefire'
-], function($, _, HomeView, loginTemplate, Backbone, Firebase){
+], function($, _, HomeView, loginTemplate, Backbone, UserCollection, UserModel, Firebase){
 
   var LoginView = Backbone.View.extend({
     el: $("#content"),
-    fireRef : new Firebase("https://glowing-inferno-9580.firebaseio.com/"),	
+    fireRef : new Firebase("https://glowing-inferno-9580.firebaseio.com/"),
+    initialize: function() {
+    	this.collection = new UserCollection();
+    	console.log(this.collection);
+    	
+
+    },
 	events: {
-		"click .sign-in": "signIn",
+		"click .sign-in": "signUp",
 		"click .signup-btn-google": "googleSignIn"
 	},
   
-    render: function(){
+    render: function() {
       
       $('.menu li').removeClass('active');
       $('.menu li a[href="#"]').parent().addClass('active');
       this.$el.html(loginTemplate);
     },
     googleSignIn: function() {
+    	var userCollection = this.collection;
+    	console.log("ref.getAuth()", this.fireRef.getAuth());
     	this.fireRef.authWithOAuthPopup("google", function(error, authData) {
  			  if (error) {
  			    console.log("Login Failed!", error);
  			  } else {
- 			    console.log("Authenticated successfully with payload:", authData);
- 			    //auth data snapshot
- 			   /*
- 			    * 
- 			    * authData.auth.provider
- 			    * authData.auth.uid
- 			    * authData.expires
- 			    * authData.google {}
- 			    * authData.google.accessToken
- 			    * authData.google.cachedUserProfile {}
- 				*	family_name: "Yagami"
- 				*	gender: "male"
- 				*	given_name: "Light"
- 				*	id: "118254511999189029260"
- 				*	link: "https://plus.google.com/118254511999189029260"
- 				*	locale: "en"
- 				*	name: "Light Yagami"
- 				*	picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
- 				* authData.google.displayName: "Light Yagami"	
- 				* *.id
- 				* *.profileImageURL
- 				* authData.provider
- 				* *.token
- 			    * 
- 			    */ 
- 			   
+ 			   console.log("Authenticated successfully with payload:", authData);
+ 			   var userModel = new UserModel({id: authData.uid, 
+ 	 				   firstName: authData.google.cachedUserProfile.given_name, 
+ 	 				   lastName: authData.google.cachedUserProfile.family_name, 
+ 	 				   provider: authData.provider, 
+ 	 				   photo: authData.profileImageURL,
+ 	 				   token: authData.token,
+ 	 				   accessToken: authData.google.accessToken}); 
+ 			   userCollection.create(userModel, function(){
+ 				   console.log("HI....complete");
+ 			   });
+ 			   	  
+ 			   new HomeView({model:userModel}).render();
  			  }
  			});
     	
     },
-	signIn: function() {
-		data = $("#content form").serialize()
+    signUp: function() {
+		data = $("#content form").serialize();
+		var userCollection = this.collection;
+		console.log("ref.getAuth()", this.fireRef.getAuth());
 		this.fireRef.createUser({
 		  email: $("#email").val(),
 		  password: $("#passwd").val()
@@ -75,9 +74,12 @@ define([
 		        console.log("Error creating user:", error);
 		    }
 		  } else {
-			  
+			  console.log(userData.uid);
+			  var userModel = new UserModel({email: $("#email").val(), id: userData.uid, firstName: $("#first-name").val(), lastName: $("#last-name").val()});
+			  userCollection.create(userModel);
+			  new HomeView({model: userModel}).render();
 		  }
-		});
+		})
 	}
   });
 

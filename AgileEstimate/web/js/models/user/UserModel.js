@@ -6,12 +6,17 @@ define([
   var UserModel = Backbone.Model.extend({
 
   		defaults : {
+  			id: '',
   		  firstName: '',
   		  lastName: '',
   		  email: '',
-  		  password:'',
-  		  provider: 'simplelogin',
-  		  photo: ''
+   		  provider: 'simplelogin',
+  		  photo: 'https://lh3.googleusercontent.com/-xGCviJJGRes/AAAAAAAAAAI/AAAAAAAAAAA/SFe3RY7PBVA/s120-c/photoa23123.jpg',
+  		  token: '',
+  		  accessToken: ''
+  		},
+  		getData: function() {
+  			
   		}
     });
 

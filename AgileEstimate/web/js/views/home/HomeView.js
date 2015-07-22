@@ -16,7 +16,9 @@ define([
 	},
   
     render: function(){
-      this.$el.html(homeTemplate);
+    console.log("render..", this.model.toJSON());
+      homeTemplate = _.template(homeTemplate);
+      this.$el.html(homeTemplate(this.model.toJSON()));
 
     },
     

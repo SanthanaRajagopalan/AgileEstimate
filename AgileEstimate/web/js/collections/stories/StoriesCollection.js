@@ -2,18 +2,18 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'models/user/UserModel',
+  'models/story/StoryModel',
   'firebase',
   'backbonefire'
-], function($, _, Backbone, UserModel, Firebase, Backfire){
-  var UserCollection = Backbone.Firebase.Collection.extend({
-    model: UserModel,
+], function($, _, Backbone, StoryModel, Firebase, Backfire){
+  var StoryCollection = Backbone.Firebase.Collection.extend({
+    model: StoryModel,
     url: "https://glowing-inferno-9580.firebaseio.com/poker/users",
     initialize: function(){      
-    	
+
     }
 
   });
  
-  return UserCollection;
+  return StoryCollection;
 });
