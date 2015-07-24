@@ -8,7 +8,7 @@ define([
 ], function($, _, Backbone, UserModel, Firebase, Backfire){
   var UserCollection = Backbone.Firebase.Collection.extend({
     model: UserModel,
-    url: "https://glowing-inferno-9580.firebaseio.com/poker/users",
+    url: "https://scrum-tools.firebaseio.com/users",
     initialize: function(){      
     	
     }

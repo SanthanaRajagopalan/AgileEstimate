@@ -3,18 +3,19 @@ define([
   'backbone'
 ], function(_, Backbone) {
 
-  var UserModel = Backbone.Model.extend({
+  var StoryModel = Backbone.Model.extend({
 
   		defaults : {
   		 sprintName: "",
   		 point: "",
   		 storyName: "",
   		 description:"",
-  		 participants: ""
+  		 participants: "",
+  		 id:''
   		 
   		}
     });
 
-  	return UserModel;
+  	return StoryModel;
 
 });

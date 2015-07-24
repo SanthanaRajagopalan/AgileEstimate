@@ -25,11 +25,11 @@ define([
   var initialize = function(){
 
     var app_router = new AppRouter,
-    fireRef = new Firebase("https://glowing-inferno-9580.firebaseio.com/");
+    fireRef = new Firebase("https://scrum-tools.firebaseio.com/users");
     app_router.on('route:defaultAction', function (actions) {
        // We have no matching route, lets display the home page 
     	if (fireRef.getAuth()) {
-			fireRef.child('poker').child('users').child(fireRef.getAuth().uid).once('value', function(snap){
+			fireRef.child(fireRef.getAuth().uid).once('value', function(snap){
 				console.log('messages', snap.val());
 	    		var homeView = new HomeView({model:snap.val()});
 	    		homeView.render();

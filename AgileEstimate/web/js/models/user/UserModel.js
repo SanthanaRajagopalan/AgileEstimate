@@ -11,9 +11,10 @@ define([
   		  lastName: '',
   		  email: '',
    		  provider: 'simplelogin',
-  		  photo: 'https://lh3.googleusercontent.com/-xGCviJJGRes/AAAAAAAAAAI/AAAAAAAAAAA/SFe3RY7PBVA/s120-c/photoa23123.jpg',
+  		  photo: 'https://lh3.googleusercontent.com/-xGCviJJGRes/AAAAAAAAAAI/AAAAAAAAAAA/SFe3RY7PBVA/s120-c/photo.jpg',
   		  token: '',
-  		  accessToken: ''
+  		  accessToken: '',
+  		  stories: ''
   		},
   		getData: function() {
   			

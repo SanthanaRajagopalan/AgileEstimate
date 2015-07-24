@@ -12,7 +12,7 @@ define([
 
   var LoginView = Backbone.View.extend({
     el: $("#content"),
-    fireRef : new Firebase("https://glowing-inferno-9580.firebaseio.com/"),
+    fireRef : new Firebase("https://scrum-tools.firebaseio.com/"),
     initialize: function() {
     	this.collection = new UserCollection();
     	console.log(this.collection);

@@ -3,34 +3,52 @@ define([
   'underscore',
   'backbone',
   'views/home/HomeView',
-  'text!templates/home/homeTemplate.html'
-], function($, _, Backbone, HomeView, homeTemplate){
+  'text!templates/home/homeTemplate.html',
+  'models/story/StoryModel',
+  'collections/stories/StoriesCollection',
+  'firebase',
+  'backbonefire'
+], function($, _, Backbone, HomeView, homeTemplate, StoryModel, StoriesCollection, Firebase){
 
   var HomeView = Backbone.View.extend({
     el: $("#content"),
-	
+    fireRef : new Firebase("https://scrum-tools.firebaseio.com/"),
 	events: {
 		"click nav li": "navControl",
 		"click button.save-game": "saveGame"
 			
 	},
-  
+	initialize: function(options) {
+		this.model = options.model;
+	},
     render: function(){
-    console.log("render..", this.model.toJSON());
-      homeTemplate = _.template(homeTemplate);
-      this.$el.html(homeTemplate(this.model.toJSON()));
+	    console.log("render..", this.model);
+	    if (this.model.toJSON) {
+	    	this.model = this.model.toJSON();
+	    }
+	    homeTemplate = _.template(homeTemplate);
+	    this.$el.html(homeTemplate(this.model));
 
     },
     
     saveGame: function() {
-		$.ajax({
-            url:"/save",
-			type: "POST",
-			data: data,
-            success:function(result){
-              console.log("saved")
-            }
-        });
+    	var self = this;
+		this.fireRef.onAuth(function(authData) {
+			console.log(authData, self.fireRef);
+			/*self.fireRef.child(selffireRef.getAuth().uid).child('stories').push({
+				
+			});*/
+			var storyModel = new StoryModel({
+				sprintName: $('input[name="sprint-name"]').val(),
+				storyName:   $('input[name="story-name"]').val(),
+				description: $('input[name="story-desc"]').val()
+			});
+			var storyCollection = new StoriesCollection({uid: self.fireRef.getAuth().uid});
+			storyCollection.add( storyModel, function(onComplete){
+				console.log("COMPLEE*****");
+			});
+			
+		});
     },
 	/**
 	 * control navigation
