@@ -11,10 +11,3 @@ Backbone.js
 
 UX:
 Card layouts
-
-Server:
-Tornado
-Nginx
-
-Database
-Firebase
