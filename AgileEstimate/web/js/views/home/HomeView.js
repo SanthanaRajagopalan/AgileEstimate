@@ -38,15 +38,15 @@ define([
 			/*self.fireRef.child(selffireRef.getAuth().uid).child('stories').push({
 				
 			});*/
+			var storyCollection = new StoriesCollection({uid: self.fireRef.getAuth().uid});
 			var storyModel = new StoryModel({
 				sprintName: $('input[name="sprint-name"]').val(),
 				storyName:   $('input[name="story-name"]').val(),
-				description: $('input[name="story-desc"]').val()
+				description: $('input[name="story-desc"]').val(),
+				id: storyCollection.length + 1
 			});
-			var storyCollection = new StoriesCollection({uid: self.fireRef.getAuth().uid});
-			storyCollection.add( storyModel, function(onComplete){
-				console.log("COMPLEE*****");
-			});
+			
+			storyCollection.add( storyModel);
 			
 		});
     },

@@ -11,9 +11,10 @@ define([
   		 storyName: "",
   		 description:"",
   		 participants: "",
-  		 id:''
-  		 
-  		}
+  		 id: "",
+  		 createdDate: new Date().toString()  		 
+  		},
+  		idAttribute: "id"
     });
 
   	return StoryModel;
